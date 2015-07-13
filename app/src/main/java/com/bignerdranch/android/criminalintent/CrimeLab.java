@@ -24,6 +24,7 @@ public class CrimeLab {
 
     private CrimeLab(Context appContext) {
         this.appContext = appContext;
+        serializer = new CriminalIntentJSONSerializer(this.appContext, FILENAME);
         try {
             crimes = serializer.loadCrimes();
         } catch (Exception e) {
@@ -64,5 +65,9 @@ public class CrimeLab {
             Log.d(TAG, "Error saving crimes");
             return false;
         }
+    }
+
+    public void deleteCrime(Crime c) {
+        crimes.remove(c);
     }
 }
